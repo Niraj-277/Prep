@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+}
+.box
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: aqua;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px  rgb(192, 234, 248);
+    margin-bottom: 10px;
+    position: relative;
+    top: 40px;
+    left :100px;
+
+}
+.item{
+    color: rgb(4, 2, 2);
+    text-decoration: solid;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 500;
+    font-size: xx-large;
+
+}
+.navbar{
+    position: fixed;
+    display: flex;
+    gap: 20px;
+    background-color: gray;
+    padding: 20px 30px;
+    justify-content: space-around;
+    align-items: center;
+
+
+}

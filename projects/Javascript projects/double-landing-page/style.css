@@ -1,0 +1,80 @@
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h1{
+    font-size: 100px;
+    color: aliceblue;
+    backdrop-filter: brightness(.5);
+    letter-spacing: 4px;
+}
+.btn{
+    background-color: black;
+    color: white;
+    padding: 20px 40px;
+    font-size: 25px;
+    border: 4px solid;
+    cursor: pointer;
+    transition: 0.8s background-color;
+    white-space: nowrap;
+}
+
+.btn:hover{
+    background-color: white;
+    color: black;
+    
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+
+}
+.split{
+    width:50%;
+    height:100%;
+    top: 0;
+    overflow: hidden;
+}
+.split.left{
+    position:absolute;
+    left: 0;
+    background-color: pink;
+    background-image: url('https://www.apple.com/v/iphone/home/cb/images/overview/consider_modals/environment/modal_trade_in__k5xx81wg61ei_large.jpg');
+    background-size: cover;
+
+}
+.split.right{
+    position: absolute;
+    right: 0;
+    background-color: palevioletred;
+    background-image: url("https://images.samsung.com/in/smartphones/galaxy-s25-ultra/buy/product_color_whiteSilver_MO.png");
+    background-size: cover;
+}
+.active-left .left{
+    width: 75%;
+}
+
+.active-left .right{
+    width: 25%;
+}
+
+.active-right .right{
+    width: 75%;
+}
+
+.active-right .left{
+    width: 25%;
+}
+
+.left ,.right{
+    transition:width 1.5s ease-in-out
+}
