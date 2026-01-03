@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niraj Books - Find your next perfect reading</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+   
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Niraj Books</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">shop</a></li>
+                <li><a href="#ebook">E-book</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#cart">My cart</a></li>
+            </ul>
+            <div class="nav-right">
+                <i class="fa fa-search"></i>
+                <span>EN <i class="fas fa-chevron-down"></i></span>
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww" alt="user picture" class="user-avatar"> 
+            </div>
+            <div class="mobile-menu">
+                 <i class="fas fa-bars" onclick="togglemenu()"></i>
+            </div>
+           
+        </nav>
+    </header>
+
+    <div class="mobile-nav" id="mobileNav" >
+        <div class="close-menu">
+                 <i class="fas fa-times" onclick="togglemenu()"></i>
+                <a href="#home">Home</a>
+                <a href="#shop">shop</a>
+                <a href="#ebook">E-book</a>
+                <a href="#about">About</a>
+                <a href="#cart">My cart</a>
+            </div>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>Find Your <br>
+            Next Book</h1>
+            <p>Discover a world where every page brings a new adventure</p>
+            <button class="btn">Explore Now <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="book-slider-container">
+            <div class="book-slider">
+                <div class="book-card"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9va3xlbnwwfHwwfHx8MA%3D%3D" alt=""></div>
+                <div class="book-card" active><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9va3xlbnwwfHwwfHx8MA%3D%3D" alt=""></div>
+                <div class="book-card"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9va3xlbnwwfHwwfHx8MA%3D%3D" alt=""></div>
+            </div>
+        </div>
+    </section>
+   <!-- authors section -->
+    <section class="authors">
+        <div class="author-card">
+            <img src="https://plus.unsplash.com/premium_photo-1664203067979-47448934fd97?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8fDA%3D"> <span>
+                    Author One
+            </span>
+        </div>
+
+        <div class="author-card">
+            <img src="https://plus.unsplash.com/premium_photo-1664203067979-47448934fd97?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8fDA%3D"> <span>
+                    Author Two
+            </span>
+        </div>
+
+        <div class="author-card">
+            <img src="https://plus.unsplash.com/premium_photo-1664203067979-47448934fd97?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8fDA%3D"> <span>
+                    Author Three
+            </span>
+        </div>
+    </section>
+    <section class="container">
+        <div class="item">box1</div>
+        <div class="item">box2</div>
+        <div class="item">box3</div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
