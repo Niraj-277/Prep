@@ -205,3 +205,137 @@ nav{
     scrollbar-color:#a47c52 #f5d6b3;
 
 }
+
+.author-card{
+    display: flex;
+    align-items: center;
+    gap: 1 rem;
+    background:white;
+    padding: 1rem 1.8rem;
+    border-radius: 50px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.author-card:hover{
+    transform: translate(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.author-card img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #f5d6b3;
+}
+
+.author-card span{
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Recommend Section */
+
+.recommended{
+    padding: 4rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+
+}
+
+.section-header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+
+}
+
+.section-header h2{
+    font-size: 2.2rem;
+    color: #4a4a4a;
+    font-weight: 400;
+    font-family: "georgia","serif";
+}
+
+.see-all{
+    color: #a67c52;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    transition: gap 0.3s ease;
+}
+
+.see-all:hover{
+    gap: 0.8rem;
+}
+
+.book-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 2.5rem;
+
+}
+
+.books-item{
+    background:white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.book-item:hover{
+    transform: translate(-10px);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.15)
+}
+
+.book-item img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 1.2rem;
+
+}
+.book-item h3{
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+}
+.book-item p{
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+
+}
+.price{
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0.8rem 0;
+}
+
+.add-to-cart{
+    background:white;
+    border: 2px solid #a67c52;
+    color: #a67c52;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.add-to-cart:hover{
+    background: #a47c52;
+    color: white;
+
+}
