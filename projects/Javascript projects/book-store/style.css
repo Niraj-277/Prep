@@ -291,25 +291,25 @@ nav{
     transition: all 0.3s ease;
 }
 
-.book-item:hover{
+.booksitem:hover{
     transform: translate(-10px);
     box-shadow: 0 10px 35px rgba(0,0,0,0.15)
 }
 
-.book-item img{
+.books-item img{
     width: 100%;
     height: 200px;
     object-fit: cover;
     margin-bottom: 1.2rem;
 
 }
-.book-item h3{
+.books-item h3{
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
     color: #333;
     font-weight: 600;
 }
-.book-item p{
+.books-item p{
     color: #888;
     font-size: 0.9rem;
     margin-bottom: 0.8rem;
@@ -338,4 +338,58 @@ nav{
     background: #a47c52;
     color: white;
 
+}
+
+
+/* Reviews section */
+
+.reviews{
+    padding: 4rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+
+}
+.reviews-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.review-card{
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba (0, 0 , 0, 0.1);
+    transition: all 0.3s ease;
+}
+.review-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.review-header{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+}
+.review-header img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f5d6b3;
+}
+
+.reviewer-info h4{
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: #333;
+
+}
+.review-text{
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
