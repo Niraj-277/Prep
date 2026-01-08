@@ -4,138 +4,111 @@ const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
 const countSpan = document.getElementById("count");
 
-
-
-// Application state
+// Application state (single source of truth)
 let tasks = [];
 
-function renderTasks(){
-    taskList.innerHTML="";
+function saveTasks(){
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+}
 
-    tasks.forEach(function(task){
-        const li =document.createElement("li");
+function loadTasks(){
+    const storedTasks=localStorage.getItem("tasks");
+    if(storedTasks){
+        tasks=JSON.parse(storedTasks);
+    }
+}
 
-        const taskSpan=document.createElement("span");
-        taskSpan.textContent=task.text;
+// Render UI from data
+function renderTasks() {
+    taskList.innerHTML = "";
 
-        if(task.completed){
-            li.classList.add("completed")
+    tasks.forEach(function (task) {
+        const li = document.createElement("li");
+
+        const taskSpan = document.createElement("span");
+        taskSpan.textContent = task.text;
+
+        if (task.completed) {
+            li.classList.add("completed");
         }
 
-        //toggle completed state
-        taskSpan.addEventListener("click",function(){
-            task.completed=!task.completed;
+        // TOGGLE completed (single click on LI)
+        li.addEventListener("click", function () {
+            task.completed = !task.completed;
             renderTasks();
         });
 
-        //Delete task
-        const deletebtn=document.createElement("button");
-        deletebtn.textContent="X"
+        // EDIT task (double click on text)
+        taskSpan.addEventListener("dblclick", function (event) {
+            event.stopPropagation(); // prevent toggle
 
-        deletebtn.addEventListener("click",function(){
-            tasks=tasks.filter(funtion(t){
-                return t.id !==task.id;
+            if (task.completed) return;
+
+            const editInput = document.createElement("input");
+            editInput.type = "text";
+            editInput.value = task.text;
+
+            li.replaceChild(editInput, taskSpan);
+            editInput.focus();
+
+            editInput.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    const newText = editInput.value.trim();
+                    if (newText !== "") {
+                        task.text = newText;
+                    }
+                    renderTasks();
+                }
+
+                if (event.key === "Escape") {
+                    renderTasks();
+                }
+            });
+        });
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "❌";
+
+        deleteBtn.addEventListener("click", function (event) {
+            event.stopPropagation(); // prevent toggle
+            tasks = tasks.filter(function (t) {
+                return t.id !== task.id;
             });
             renderTasks();
-        })
+        });
 
-        li.appendChild(taskSpan)
-        li.appendChild(deletebtn)
-        taskList.appendChild(li)
-        
-    })
+        li.appendChild(taskSpan);
+        li.appendChild(deleteBtn);
+        taskList.appendChild(li);
+    });
 
-    countSpan.textContent=tasks.length;
+    countSpan.textContent = tasks.length;
+    saveTasks();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Add task on button click
 addBtn.addEventListener("click", function () {
     const taskText = taskInput.value.trim();
 
-    // Validation: prevent empty input
+    // Validation
     if (taskText === "") {
         alert("Please enter a task");
         return;
     }
 
-    // Validation: prevent duplicate tasks
-    const existingTasks = document.querySelectorAll("#taskList li");
-    for (let task of existingTasks) {
-        if (task.textContent === taskText) {
-            alert("Task already exists");
-            return;
-        }
-    }
+    // Create task object
+    const newTask = {
+        id: Date.now(),
+        text: taskText,
+        completed: false
+    };
 
-    // Create new task item
-    const li = document.createElement("li");
-    li.textContent = taskText;
-    //create span for task text
-    const taskSpan=document.createElement("span");
-    taskSpan.textContent=taskText
+    // Store task in array
+    tasks.push(newTask);
 
-    taskSpan.addEventListener("click",function(){
-        li.classList.toggle("completed")
-    })
-
-    const deletebtn=document.createElement("button");
-    deletebtn.textContent="X";
-    deletebtn.classList.add("deletebutton");
-
-    //delete task on click
-
-    deletebtn.addEventListener("click",function(){
-        taskList.removeChild(li)
-        taskCount--;
-        countSpan.textContent=taskCount;
-    })
-
-    li.appendChild(taskSpan);
-    li.appendChild(deletebtn);
-
-    // Remove task on click
-    // li.addEventListener("click", function () {
-    //     taskList.removeChild(li);
-    //     taskCount--;
-    //     countSpan.textContent = taskCount;
-    // });
-
-    // li.addEventListener("click",function(){
-    //     li.classList.toggle("completed");
-    // });
-    
-
-    //highlighting the main task
-
-    li.addEventListener("click",function(){
-        li.classList.toggle("highlight")
-    })
-
-    // Add task to list
-    taskList.appendChild(li);
-
-    // Update task count
-    taskCount++;
-    countSpan.textContent = taskCount;
+    // Re-render UI
+    renderTasks();
 
     // Clear input field
     taskInput.value = "";
@@ -147,3 +120,9 @@ taskInput.addEventListener("keypress", function (event) {
         addBtn.click();
     }
 });
+
+loadTasks();
+renderTasks();
+
+
+
