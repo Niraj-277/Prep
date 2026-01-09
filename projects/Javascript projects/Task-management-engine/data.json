@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1767949663716,
+    "text": "Learn backend JavaScript",
+    "completed": true
+  },
+  {
+    "id": 1767949663719,
+    "text": "Understand async/await",
+    "completed": false
+  }
+]
