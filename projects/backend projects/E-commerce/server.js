@@ -72,6 +72,31 @@ app.get('/hello',(req,res)=>{
         })
     })
 
+
+app.post('/companies',(req,res)=>{
+
+    console.log("user is adding the company")
+    //destructuring
+    const{name}=req.body
+    //validation
+    if(!name){
+        res.status(400).json({
+            message:"bad request name not present"
+        })
+    }
+    //pushing in the array
+    companies.push(name);
+
+    //send the response
+    res.status(201).json({
+        status:"success",
+        message:"company added successfully",
+        data:companies
+    })
+})
+
+
+
 //3.Start the server(Open the Restaurant doors)
 const PORT=3000;
 app.listen(PORT,()=>{
