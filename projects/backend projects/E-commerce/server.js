@@ -1,4 +1,14 @@
 const express=require('express')
+const dotenv=require('dotenv')
+const connectDb=require('./config/db')
+const Product=require("./models/product")
+
+//Load config
+
+dotenv.config();
+
+//connect to database
+connectDb();
 
 const app = express();
 
@@ -7,93 +17,77 @@ const app = express();
 // applying a middleware function to my applictation
 app.use(express.json());// express.json helps in parsing the json request body
 
-//fake database
 
-const products=[{id:1,name:'laptop',price:1000},
-    {id:2,name:"phone",price:500}
-];
+//database route
+app.post('/products',async(req,res)=>{
+    try{
+        //we dont need to create an id :mongo does it 
 
-companies=['hcl','tcs','Accenture','infosys']
-
-//2.Route    // the request contains everything about the user (their ip address , what browser they use , what data they sent);
-app.get('/products',(req,res)=>{
-    console.log("Customer asked for products");
-
-    res.json({
-       status:'success',
-       message:"Menu fetched",
-       data:products,    })
-})
-
-//Creating a post route
-app.post('/products',(req,res)=>{
-    console.log("Receiving new product data;",req.body);
-
-    //----step 1:Destructuring ---
-
-    //Extract name and price from the user's data(The body)
-    const{name,price}=req.body;
-
-    //---step 2:Validation
-    //if they didnt send a name and didnt send a price --reject is!!
-    if(!name || !price ){
-        return res.status(400).json({
-            error:"Bad request"
-        })
-    }
-
-    //--step 3 Create the resource
-
-    const newProduct={
-        id:products.length+1,//simple id generator
-        name:name,
-        price:price,
-    };
-    //-- save to our database
-    products.push(newProduct);
-
-    //--step 4: Send the response
-    // 201 means :created(200 is just "ok")
-    res.status(201).json({
-        message:"product added successfully",
-        product :newProduct
-    })
-})
-
-
-app.get('/hello',(req,res)=>{
-            console.log("getting the companies");
+        const product=await Product.create(req.body);
 
         res.status(201).json({
-            status:"success",
-            message:'hello niraj best of luck for learning nodejs',
-            data:companies,
-
+            success:true,
+            data:product
         })
-    })
+    }catch(error){
+        //if user sends bad data
+        res.status(400).json({success:false,error:error.message});
+    }
+})
 
+//Get :fetch from mongodb
+app.get('products',async(req,res)=>{
+    try{
+        const products=await Product.find();
 
-app.post('/companies',(req,res)=>{
-
-    console.log("user is adding the company")
-    //destructuring
-    const{name}=req.body
-    //validation
-    if(!name){
-        res.status(400).json({
-            message:"bad request name not present"
+        res.status(200).json({
+            success:true,
+            count:products.length,
+            data:products
+        });
+    }catch(error){
+        res.status(500).json({
+            success:false,
+            error:error.message
         })
     }
-    //pushing in the array
-    companies.push(name);
-
-    //send the response
-    res.status(201).json({
-        status:"success",
-        message:"company added successfully",
-        data:companies
-    })
 })
+
+
+
+// app.get('/hello',(req,res)=>{
+//             console.log("getting the companies");
+
+//         res.status(201).json({
+//             status:"success",
+//             message:'hello niraj best of luck for learning nodejs',
+//             data:companies,
+
+//         })
+//     })
+
+
+// app.post('/companies',(req,res)=>{
+
+//     console.log("user is adding the company")
+//     //destructuring
+//     const{name}=req.body
+//     //validation
+//     if(!name){
+//         res.status(400).json({
+//             message:"bad request name not present"
+//         })
+//     }
+//     //pushing in the array
+//     companies.push(name);
+
+//     //send the response
+//     res.status(201).json({
+//         status:"success",
+//         message:"company added successfully",
+//         data:companies
+//     })
+// })
 
 
 
