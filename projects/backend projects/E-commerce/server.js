@@ -19,75 +19,94 @@ app.use(express.json());// express.json helps in parsing the json request body
 
 
 //database route
-app.post('/products',async(req,res)=>{
-    try{
-        //we dont need to create an id :mongo does it 
 
-        const product=await Product.create(req.body);
-
-        res.status(201).json({
-            success:true,
-            data:product
-        })
-    }catch(error){
-        //if user sends bad data
-        res.status(400).json({success:false,error:error.message});
-    }
-})
-
-//Get :fetch from mongodb
-app.get('products',async(req,res)=>{
-    try{
-        const products=await Product.find();
-
-        res.status(200).json({
-            success:true,
-            count:products.length,
-            data:products
-        });
-    }catch(error){
-        res.status(500).json({
-            success:false,
-            error:error.message
-        })
-    }
-})
+app.use('/api/v1/products',require('./routes/productRoutes'));
 
 
 
-// app.get('/hello',(req,res)=>{
-//             console.log("getting the companies");
+// app.post('/products',async(req,res)=>{
+//     try{
+//         //we dont need to create an id :mongo does it 
+
+//         const product=await Product.create(req.body);
 
 //         res.status(201).json({
-//             status:"success",
-//             message:'hello niraj best of luck for learning nodejs',
-//             data:companies,
-
+//             success:true,
+//             data:product
 //         })
-//     })
+//     }catch(error){
+//         //if user sends bad data
+//         res.status(400).json({success:false,error:error.message});
+//     }
+// })
 
+// //Get :fetch from mongodb
+// app.get('/products',async(req,res)=>{
+//     console.log("fetching the products");
+//     try{
+//         const products=await Product.find();
 
-// app.post('/companies',(req,res)=>{
-
-//     console.log("user is adding the company")
-//     //destructuring
-//     const{name}=req.body
-//     //validation
-//     if(!name){
-//         res.status(400).json({
-//             message:"bad request name not present"
+//         res.status(200).json({
+//             success:true,
+//             count:products.length,
+//             data:products
+//         });
+//     }catch(error){
+//         res.status(500).json({
+//             success:false,
+//             message:"erro"
 //         })
 //     }
-//     //pushing in the array
-//     companies.push(name);
-
-//     //send the response
-//     res.status(201).json({
-//         status:"success",
-//         message:"company added successfully",
-//         data:companies
-//     })
 // })
+
+
+
+// //--update route
+
+// app.put('/products/:id',async(req,res)=>{
+
+//     console.log(req.params.id)
+//     try{
+//         const product = await Product.findByIdAndUpdate(req.params.id,req.body,{
+//             new:true,
+//             runValidators:true
+//         });
+//         if(!product){
+//             return res.status(404).json({success:false,message:"product not found"})
+//         }
+//         res.status(200).json({success:true,data:product});
+//     }catch(error){
+//         res.status(400).json({success:false,error:error.message})
+//     }
+// })
+
+// app.delete('/products/:id',async(req,res)=>{
+//     console.log("ID:", req.params.id);
+//     try{
+//         const product = await Product.findByIdAndDelete(req.params.id);
+        
+//         if(!product){
+//             return res.status(404).json({
+//                 success:false,message:"Product not found"
+//             })
+//         }
+//         res.status(200).json({success:true,message:'product deleted successfully'})
+//     }catch(error){
+//         res.status(400).json({success:false,error:error.message})
+//     }
+    
+// })
+
+app.use((req,res,next)=>{
+    const timestamp =new Date().toISOString();
+    const method=req.method;
+    const url=req.url;
+
+    console.log(`[${timestamp}]${method} request made to ${url}`);
+
+    //Crucial : Tell express to move to the next function /route;
+    next();
+})
 
 
 
