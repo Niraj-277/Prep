@@ -4,7 +4,7 @@ const Product = require('../models/product');
 
 //use router instead of apps
 
-//!Import the functions from teh controller 
+//!Import the functions from the controller 
 const {
     getProducts,
     createProduct,
@@ -12,10 +12,12 @@ const {
     deleteProduct
 }=require('../controllers/productController')
 
-//2.connect the path to the function
-router.route('/').get(getProducts).post(createProduct);
+const {protect,authorize}=require('../middleware/auth');
 
-router.route('/:id').put(updateProduct).delete(deleteProduct);
+//2.connect the path to the function
+router.route('/').get(getProducts).post(protect,authorize('admin'),createProduct);
+
+router.route('/:id').put(protect,authorize('admin'),updateProduct).delete(protect,authorize('admin'),deleteProduct);
 
 module.exports=router;
 
