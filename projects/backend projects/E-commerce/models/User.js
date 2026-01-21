@@ -14,7 +14,7 @@ const UserSchema=new mongoose.Schema({
         unique:true,
 
     },
-    pasword:{
+    password:{
         type:String,
         required:true,
         minlength:6,
@@ -29,19 +29,16 @@ const UserSchema=new mongoose.Schema({
 UserSchema.pre('save',async function(next){
     const salt = await bcrypt.genSalt(10);//generate a random salt
 
-    this.pasword=await bcrypt.hash(this.password,salt)//hash it 
+    this.password=await bcrypt.hash(this.password,salt)//hash it 
 });
 
 //method to sign jwt and return
-UserSchema.method.getSignedJwtToken=function(){
+UserSchema.methods.getSignedJwtToken=function(){
     return jwt.sign({
         id:this._id}, process.env.JWT_SECRET,{
             expiresIn:process.env.JWT_EXPIRE
         
     });
 }
-
-
-
 
 module.exports=mongoose.model('User',UserSchema)

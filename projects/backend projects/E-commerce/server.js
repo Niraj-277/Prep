@@ -1,11 +1,13 @@
 const express=require('express')
 const dotenv=require('dotenv')
-const connectDb=require('./config/db')
-const Product=require("./models/product")
-
-//Load config
 
 dotenv.config();
+const connectDb=require('./config/db')
+const Product=require("./models/product")
+const authRoutes=require('./routes/authRoutes')
+//Load config
+
+
 
 //connect to database
 connectDb();
@@ -21,6 +23,8 @@ app.use(express.json());// express.json helps in parsing the json request body
 //database route
 
 app.use('/api/v1/products',require('./routes/productRoutes'));
+
+app.use('/api/v1/auth',authRoutes);
 
 
 

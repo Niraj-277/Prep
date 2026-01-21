@@ -13,9 +13,10 @@ exports.register = async(req,res,next)=>{
         const user=await User.create({
             name,
             email,
-            pasword,
+            password,
             role
         });
+        
 
         //2.Create the "wristband(token)"
         //we defined this method in your User model earlier
